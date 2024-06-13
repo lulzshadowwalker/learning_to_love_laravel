@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         Product::factory(4)
             ->hasVariants(5)
-            ->has(Image::factory()->sequence(fn (Sequence $sequence) => ['featured' => $sequence->index === 0]))
+            ->has(Image::factory(3)->sequence(fn (Sequence $sequence) => ['featured' => $sequence->index === 0]))
             ->create();
     }
 }

@@ -5,3 +5,9 @@
 [x-cloak] {
     display: none;
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #e7e7e7;
+    }
+}
