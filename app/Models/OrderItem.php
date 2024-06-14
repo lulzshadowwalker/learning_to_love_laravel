@@ -11,13 +11,16 @@ class OrderItem extends Model
 {
     use HasFactory;
 
-    public $casts = [
-        'price' => MoneyCast::class,
-        'amount_total' => MoneyCast::class,
-        'amount_subtotal' => MoneyCast::class,
-        'amount_discount' => MoneyCast::class,
-        'amount_tax' => MoneyCast::class,
-    ];
+    protected function casts(): array
+    {
+        return [
+            'price' => MoneyCast::class,
+            'amount_total' => MoneyCast::class,
+            'amount_subtotal' => MoneyCast::class,
+            'amount_discount' => MoneyCast::class,
+            'amount_tax' => MoneyCast::class,
+        ];
+    }
 
     public function order(): BelongsTo
     {

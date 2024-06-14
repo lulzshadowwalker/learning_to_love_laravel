@@ -16,6 +16,10 @@
                         Home
                     </x-nav-link>
 
+                    <x-nav-link href="{{ route('orders.index') }}" :active="request()->routeIs('home')">
+                        My Orders
+                    </x-nav-link>
+
                     <livewire:cart-button />
                 </div>
             </div>
