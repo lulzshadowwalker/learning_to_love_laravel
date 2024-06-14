@@ -14,7 +14,6 @@ class HandleStripeCheckoutCompleted
 {
     public function handle($sessionId)
     {
-        Log::info('Handling stripe checkout completed event.');
         DB::transaction(function () use ($sessionId) {
             $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
             $user = User::find($session->metadata->user_id);

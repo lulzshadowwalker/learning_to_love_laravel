@@ -11,7 +11,7 @@
                     <p class="mt-2">Color: <span class="text-gray-500">{{ $item->variant->color }}</span></p>
                     <p>Size: <span class="text-gray-500">{{ $item->variant->size }}</span></p>
 
-                    <div class="flex items-center gap-2 mt-auto">
+                    <div class="flex items-center gap-2 mt-auto pt-2">
                         <x-button class="!bg-red-400 transition-all hover:!bg-red-500"
                             wire:click="decrement({{ $item->id }})"><i class="fa-duotone fa-minus"></i>
                             @if ($item->quantity === 1)
