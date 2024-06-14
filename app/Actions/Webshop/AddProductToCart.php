@@ -10,9 +10,12 @@ class AddProductToCart
     public function add($variantId, $quantity = 1, Cart $cart = null)
     {
         // hmm nice.
-        ($cart ?: CartFactory::make())->items()->firstOrCreate(
+        $item = ($cart ?: CartFactory::make())->items()->firstOrCreate(
             ['product_variant_id' => $variantId],
             ['quantity' => 0]
-        )->increment('quantity', $quantity);
+        );
+
+        $item->increment('quantity', $quantity);
+        $item->touch();
     }
 }

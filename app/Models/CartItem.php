@@ -12,6 +12,8 @@ class CartItem extends Model
 {
     use HasFactory;
 
+    protected $touches = ['cart'];
+
     public function product(): HasOneThrough
     {
         return $this->hasOneThrough(
@@ -34,5 +36,10 @@ class CartItem extends Model
     public function variant(): BelongsTo
     {
         return $this->belongsTO(ProductVariant::class, 'product_variant_id', 'id');
+    }
+
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class);
     }
 }
