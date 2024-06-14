@@ -2,15 +2,11 @@
 
 namespace App\Providers;
 
-use App\Actions\Webshop\MigrateSessionCart;
-use App\Factories\CartFactory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Fortify\Fortify;
+use Laravel\Cashier\Cashier;
 use Money\Currencies\ISOCurrencies;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
@@ -33,21 +29,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
-        Fortify::authenticateUsing(function (Request $request) {
-            $user = User::where('email', $request->email)->first();
-
-            if (
-                $user &&
-                Hash::check($request->password, $user->password)
-            ) {
-                (new MigrateSessionCart())->migrate(
-                    CartFactory::make(),
-                    $user?->cart ?: $user->cart()->create(),
-                );
-
-                return $user;
-            }
-        });
+        Cashier::useCustomerModel(User::class);
+        Cashier::calculateTaxes();
 
         Blade::stringable(function (Money $money) {
             $currencies = new ISOCurrencies();

@@ -40,8 +40,10 @@
                     Cart</x-button>
 
                 @auth
-                    <x-button class="!bg-green-400 transition-all hover:!bg-green-500"
-                        wire:click="checkout">Checkout</x-button>
+                    <x-button class="!bg-green-400 transition-all hover:!bg-green-500 flex items-center gap-1"
+                        wire:click="checkout">
+                        Checkout
+                    </x-button>
                 @endauth()
                 @guest()
                     <a href="/login?to=cart">

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Actions\Webshop\AddProductToCart;
+use App\Actions\Webshop\CreateStripeCheckoutSession;
 use App\Factories\CartFactory;
 use Laravel\Jetstream\InteractsWithBanner;
 use Livewire\Component;
@@ -55,10 +56,8 @@ class Cart extends Component
         $this->dispatch('cart-update');
     }
 
-    public function checkout(): void
+    public function checkout(CreateStripeCheckoutSession $checkoutSession)
     {
-        $this->cart->items()->delete(); // muahaha
-        $this->banner('Thank you for your purchase!');
-        $this->dispatch('cart-update');
+        return $checkoutSession->createFromCart($this->cart);
     }
 }
