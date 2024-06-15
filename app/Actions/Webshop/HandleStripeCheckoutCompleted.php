@@ -14,6 +14,7 @@ class HandleStripeCheckoutCompleted
 {
     public function handle($sessionId)
     {
+        Log::info("message from HandleStripeCheckoutCompleted.php");
         DB::transaction(function () use ($sessionId) {
             $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
             $user = User::find($session->metadata->user_id);
